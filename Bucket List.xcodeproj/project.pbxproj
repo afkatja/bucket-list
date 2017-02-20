@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94518AF71E5A03DB0002E02A /* PlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94518AF61E5A03DB0002E02A /* PlacesViewController.swift */; };
 		9481388C1E59EDE80019816B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481388B1E59EDE80019816B /* AppDelegate.swift */; };
 		9481388E1E59EDE80019816B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481388D1E59EDE80019816B /* ViewController.swift */; };
 		948138911E59EDE80019816B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9481388F1E59EDE80019816B /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		94518AF61E5A03DB0002E02A /* PlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesViewController.swift; sourceTree = "<group>"; };
 		948138881E59EDE80019816B /* Bucket List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bucket List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9481388B1E59EDE80019816B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9481388D1E59EDE80019816B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				9481388B1E59EDE80019816B /* AppDelegate.swift */,
 				9481388D1E59EDE80019816B /* ViewController.swift */,
 				9481388F1E59EDE80019816B /* Main.storyboard */,
+				94518AF61E5A03DB0002E02A /* PlacesViewController.swift */,
 				948138921E59EDE80019816B /* Assets.xcassets */,
 				948138941E59EDE80019816B /* LaunchScreen.storyboard */,
 				948138971E59EDE80019816B /* Info.plist */,
@@ -193,6 +196,7 @@
 				TargetAttributes = {
 					948138871E59EDE80019816B = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = DFQ6DAEJ92;
 						ProvisioningStyle = Automatic;
 					};
 					9481389B1E59EDE80019816B = {
@@ -260,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9481388E1E59EDE80019816B /* ViewController.swift in Sources */,
+				94518AF71E5A03DB0002E02A /* PlacesViewController.swift in Sources */,
 				9481388C1E59EDE80019816B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +417,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = DFQ6DAEJ92;
 				INFOPLIST_FILE = "Bucket List/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ios-course.Bucket-List";
@@ -424,6 +430,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = DFQ6DAEJ92;
 				INFOPLIST_FILE = "Bucket List/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ios-course.Bucket-List";
@@ -505,6 +512,7 @@
 				948138B21E59EDE80019816B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		948138B31E59EDE80019816B /* Build configuration list for PBXNativeTarget "Bucket ListTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +521,7 @@
 				948138B51E59EDE80019816B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		948138B61E59EDE80019816B /* Build configuration list for PBXNativeTarget "Bucket ListUITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +530,7 @@
 				948138B81E59EDE80019816B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
