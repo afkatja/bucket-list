@@ -10,12 +10,19 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate  {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,UITextFieldDelegate  {
     @IBOutlet weak var map: MKMapView!
     var locationManager = CLLocationManager()
     
+    @IBOutlet weak var searchField: UITextField!
+    @IBAction func searchMap(_ sender: Any) {
+        if let input = searchField.text {
+            self.getLocationFromInput(input: input)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchField.delegate = self
         
         let uiLongpressHandler = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.longpress(gestureRecognizer:)))
         uiLongpressHandler.minimumPressDuration = 1.0
@@ -61,6 +68,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     func setupMap(lat: CLLocationDegrees, long: CLLocationDegrees, delta: CLLocationDegrees) {
         let span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
         let location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -99,12 +111,35 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+    func processForwardGeocodingResponse(withplacemarks placemarks: [CLPlacemark]?, input: String, error: Error?) {
+        if error != nil {
+            print(error!)
+        } else {
+            if (placemarks?.count)! > 0 {
+                let placemark = placemarks![0]
+                let location = placemark.location
+                if location != nil {
+                    let coord = location!.coordinate
+                    self.setupMap(lat: (coord.latitude), long: (coord.longitude), delta: 0.05)
+                    self.addAnnotation(title: input, subtitle: "", latitude: (coord.latitude), longitude: (coord.longitude))
+                    places.append(["name": input, "subtitle": "Own input", "lat": String(describing: coord.latitude), "lon": String(describing: coord.longitude)])
+                    updateUserPlaces(object: places, key: "places")
+                }
+            }
+        }
+    }
+    
     func getAddressFromLocation(location: CLLocation) {
         CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error)  in
             self.processGeoResponse(withPlacemarks: placemarks, location: location, error: error)
         }
     }
 
+    func getLocationFromInput(input: String) {
+        CLGeocoder().geocodeAddressString(input, completionHandler: {(placemarks, error) in
+            self.processForwardGeocodingResponse(withplacemarks: placemarks, input: input, error: error)
+        })
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

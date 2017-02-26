@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -83,17 +84,33 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="hLG-Tm-i0L"/>
                                 </connections>
                             </mapView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search places" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tKZ-yP-db7">
+                                <rect key="frame" x="16" y="72" width="343" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="A5h-X1-Vi1"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <action selector="searchMap:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="GUx-zl-JXG"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="HDX-u4-37H" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="4ey-OL-bHd"/>
                             <constraint firstAttribute="trailing" secondItem="HDX-u4-37H" secondAttribute="trailing" id="OJ4-li-7vI"/>
+                            <constraint firstItem="tKZ-yP-db7" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="QgN-wl-dy9"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="HDX-u4-37H" secondAttribute="bottom" id="bfZ-km-9dh"/>
+                            <constraint firstItem="tKZ-yP-db7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="eJm-nH-iNd"/>
                             <constraint firstItem="HDX-u4-37H" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mRE-eK-erO"/>
+                            <constraint firstItem="tKZ-yP-db7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="zxb-Lp-Gvh"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="map" destination="HDX-u4-37H" id="Fsd-7V-lgT"/>
+                        <outlet property="searchField" destination="tKZ-yP-db7" id="qKe-Sx-fgj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
