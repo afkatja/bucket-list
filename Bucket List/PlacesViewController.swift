@@ -10,6 +10,10 @@ import UIKit
 
 var places = [Dictionary<String, String>()]
 var activePlace = -1
+func updateUserPlaces(object: [Dictionary<String, String>], key: String) {
+     UserDefaults.standard.set(object, forKey: key)
+}
+
 class PlacesViewController: UITableViewController {
 
     @IBOutlet var placesTable: UITableView!
@@ -18,6 +22,9 @@ class PlacesViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        if let userPlaces = UserDefaults.standard.object(forKey: "places") as? [Dictionary<String, String>] {
+            places = userPlaces
+        }
         if places.count == 1 && places[0].count == 0 {
             places.remove(at: 0)
             places.append([
@@ -25,8 +32,10 @@ class PlacesViewController: UITableViewController {
                 "subtitle": "Costa Rica",
                 "lat": "9.934739",
                 "lon": "-84.087502"
-                ])
+            ])
         }
+        updateUserPlaces(object: places, key: "places")
+        
         activePlace = -1
         placesTable.reloadData()
     }
@@ -49,29 +58,26 @@ class PlacesViewController: UITableViewController {
         if let placeName = places[indexPath.row]["name"] {
             cell.textLabel?.text = placeName
         }
-        activePlace = indexPath.row
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        activePlace = indexPath.row
         performSegue(withIdentifier: "toMap", sender: nil)
     }
-    /*
-    // Override to support conditional editing of the table view.
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
-    // Override to support editing the table view.
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            places.remove(at: indexPath.row)
+            updateUserPlaces(object: places, key: "places")
+            placesTable.reloadData()
+        }
     }
-
+/*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
 

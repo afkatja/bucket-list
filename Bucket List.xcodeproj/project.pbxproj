@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94407C511E5F56A700A4299C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94407C501E5F56A700A4299C /* CoreLocation.framework */; };
 		94518AF71E5A03DB0002E02A /* PlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94518AF61E5A03DB0002E02A /* PlacesViewController.swift */; };
 		9481388C1E59EDE80019816B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481388B1E59EDE80019816B /* AppDelegate.swift */; };
 		9481388E1E59EDE80019816B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481388D1E59EDE80019816B /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		94407C501E5F56A700A4299C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		94518AF61E5A03DB0002E02A /* PlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesViewController.swift; sourceTree = "<group>"; };
 		948138881E59EDE80019816B /* Bucket List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bucket List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9481388B1E59EDE80019816B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94407C511E5F56A700A4299C /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +79,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		94407C4F1E5F56A700A4299C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				94407C501E5F56A700A4299C /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9481387F1E59EDE80019816B = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +94,7 @@
 				9481389F1E59EDE80019816B /* Bucket ListTests */,
 				948138AA1E59EDE80019816B /* Bucket ListUITests */,
 				948138891E59EDE80019816B /* Products */,
+				94407C4F1E5F56A700A4299C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

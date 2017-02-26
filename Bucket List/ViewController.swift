@@ -8,9 +8,12 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate  {
     @IBOutlet weak var map: MKMapView!
+    var locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,7 +21,6 @@ class ViewController: UIViewController, MKMapViewDelegate {
         uiLongpressHandler.minimumPressDuration = 1.0
         map.addGestureRecognizer(uiLongpressHandler)
         
-        // Do any additional setup after loading the view, typically from a nib.
         if activePlace > -1 {
             if places.count > activePlace {
                 if let name = places[activePlace]["name"] {
@@ -34,7 +36,21 @@ class ViewController: UIViewController, MKMapViewDelegate {
                     }
                 }
             }
+        } else {
+            //creating a new place from user's location
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation: CLLocation = locations[0]
+        let lat = userLocation.coordinate.latitude
+        let long = userLocation.coordinate.longitude
+        self.setupMap(lat: lat, long: long, delta: 0.05)
+        locationManager.stopUpdatingLocation();
     }
     
     func longpress(gestureRecognizer: UIGestureRecognizer) {
@@ -60,25 +76,32 @@ class ViewController: UIViewController, MKMapViewDelegate {
         self.map.addAnnotation(annotation)
     }
     
+    func processGeoResponse(withPlacemarks placemarks:[CLPlacemark]?, location: CLLocation, error: Error?) {
+        if error != nil {
+            print(error!)
+        } else {
+            if let placemark = placemarks?[0] {
+                var title = ""
+                var subtitle = ""
+                if placemark.locality != nil {
+                    title += placemark.locality!
+                    if placemark.thoroughfare != nil {
+                        subtitle += placemark.thoroughfare!
+                    }
+                } else {
+                    title = "\(String(location.coordinate.latitude)) \(String(location.coordinate.longitude))"
+                    subtitle = "Added \(NSDate())"
+                }
+                places.append(["name": title, "subtitle": subtitle, "lat": String(location.coordinate.latitude), "lon": String(location.coordinate.longitude)])
+                updateUserPlaces(object: places, key: "places")
+                self.addAnnotation(title: title, subtitle: subtitle, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            }
+        }
+    }
+    
     func getAddressFromLocation(location: CLLocation) {
         CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error)  in
-            if error != nil {
-                print(error!)
-            } else {
-                if let placemark = placemarks?[0] {
-                    var title = ""
-                    var subtitle = ""
-                    if placemark.locality != nil {
-                        title += placemark.locality!
-                        if placemark.thoroughfare != nil {
-                            subtitle += placemark.thoroughfare!
-                        }
-                    } else {
-                        self.addAnnotation(title: "\(String(location.coordinate.latitude)) \(String(location.coordinate.longitude))", subtitle: "Added \(NSDate())", latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                    }
-                    self.addAnnotation(title: title, subtitle: subtitle, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                }
-            }
+            self.processGeoResponse(withPlacemarks: placemarks, location: location, error: error)
         }
     }
 
